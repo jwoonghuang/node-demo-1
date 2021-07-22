@@ -24,12 +24,75 @@ var server = http.createServer(function(request, response){
     if(path === '/'){
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
-        response.write(`yes ok!`)
+        response.write(`
+            <!DOCTYPE html>
+                <html>
+                <head>
+                  <meta charset="utf-8">
+                  <meta name="viewport" content="width=device-width">
+                  <link rel="stylesheet" href="/x">
+                  <title>网络一线牵，珍惜这段缘</title>
+                </head>
+                <body>
+                <div class="heart">
+                  <div class="circle1"></div>
+                  <div class="circle2"></div>
+                  <div class="square"></div>
+                </div>
+                </body>
+                </html>
+        `)
         response.end()
     } else if(path === '/x'){
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/css;charset=utf-8')
-        response.write(`body{color: red;}`)
+        response.write(`
+            * {
+              margin: 0;
+              padding: 0;
+            }
+            .heart {
+              position: relative;
+              margin: 200px;
+              display:inline-block;
+              animation: RedHeart .3s infinite alternate;
+              
+            }
+            @keyframes RedHeart{
+              0%{
+                transform: scale(1.0);
+              }
+              100%{
+                transform: scale(1.5);
+              }
+            }
+            .circle1 {
+              width: 100px;
+              height: 100px;
+              background: red;
+              position: absolute;
+              bottom: 100px;
+              right: 100px;
+              transform: rotate(45deg) translateX(60px);
+              border-radius: 50% 0 0 50%;
+            }
+            .circle2 {
+              width: 100px;
+              height: 100px;
+              background: red;
+              position: absolute;
+              bottom: 100px;
+              left: 100px;
+              transform: rotate(45deg) translateY(60px);
+              border-radius: 50% 50% 0 0;
+            }
+            .square {
+              width: 100px;
+              height: 100px;
+              background: red;
+              transform: rotate(45deg)
+            }
+            `)
         response.end()
     } else {
         response.statusCode = 404
